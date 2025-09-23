@@ -550,7 +550,6 @@ if moduleName == 2:
     else:
         pass
 
-
 #Class for databases
 class databases:
     def __init__(self, ca, exam):
@@ -617,8 +616,14 @@ class OOP:
         self.exam = exam
 
     def overallOOPGrade(self):
-        oopGrade = (((((self.labs/40) + (self.assignment/60) * 100))) + (((self.exam/50)*100)) / 2) 
-        print("Your overall grade is ",oopGrade,"%")
+        #labs + assignment (together worth 50%)
+        continuous_assessment = ((self.labs / 40) * 20) + ((self.assignment / 60) * 30)
+        
+        #exam (worth 50%)
+        exam_part = (self.exam / 50) * 50
+        
+        oopGrade = continuous_assessment + exam_part
+        print("Your overall grade is", oopGrade, "%")
 
 #If user selected OOP
 if moduleName == 4:
@@ -632,7 +637,7 @@ if moduleName == 4:
         
         labGrade = float(input("Enter your lab grade(%): "))
         #To cap lab grade at 40
-        while ((labGrade < 0) or (caGrade > 40)):
+        while ((labGrade < 0) or (labGrade > 40)):
             labGrade = float(input("Lab grade is only marked over 40\nPlease type in a valid grade:\n"))
     
         assignmentGrade = float(input("Enter your assignment grade(%): "))
