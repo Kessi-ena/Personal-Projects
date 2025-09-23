@@ -363,6 +363,64 @@ if moduleName == 2:
         pass
 
 
+#Class for databases
+class databases:
+    def __init__(self, ca, exam):
+        self.ca = ca
+        self.exam = exam
+
+    def overallDatabasesGrade(self):
+        databasesGrade = ((((self.ca/50)*100) + ((self.exam/50)*100)) / 2) 
+        print("Your overall grade is ",databasesGrade,"%")
+
+#If user selected databases 
+if moduleName == 3:
+    print("Enter 'y' for grades you have\nEnter 'n' for grades you don't have.")
+    ca = input("CA: ")
+    exam = input("Exam: ")
+
+    #When user has both grades
+    if ((ca == 'y') or (ca == 'Y')) and ((exam == 'y') or (exam == 'Y')):
+        caGrade = float(input("Enter your CA grade(%): "))
+        
+        #To cap test grade at 50
+        while ((caGrade < 0) or (caGrade > 50)):
+            caGrade = float(input("Test grade is only marked over 50\nPlease type in a valid grade:\n"))
+    
+        examGrade = float(input("Enter your exam grade(%): "))
+        #To cap project grade at 50
+        while ((examGrade < 0) or (examGrade > 40)):
+            examGrade = float(input("Exam grade is only marked over 50\nPlease type in a valid grade:\n"))
+
+        #Prints final grade
+        Calc3 = databases(caGrade, examGrade)
+        Calc3.overallDatabasesGrade()
+
+    #When user only has CA
+    if ((ca == 'y') or (ca == 'Y')) and ((exam == 'n') or (exam == 'N')):
+        caGrade = float(input("Enter your CA grade(%): "))
+        
+        #To cap test grade at 50
+        while ((caGrade < 0) or (caGrade > 50)):
+            caGrade = float(input("Test grade is only marked over 50\nPlease type in a valid grade:\n"))
+
+        #Prints final grade
+        Calc3 = databases(caGrade, 0)
+        Calc3.overallDatabasesGrade()
+
+    #When user only has exam
+    if ((ca == 'n') or (ca == 'N')) and ((exam == 'y') or (exam == 'Y')):
+        examGrade = float(input("Enter your exam grade(%): "))
+        
+        #To cap test grade at 50
+        while ((examGrade < 0) or (examGrade > 50)):
+            examGrade = float(input("Exam grade is only marked over 50\nPlease type in a valid grade:\n"))
+
+        #Prints final grade
+        Calc3 = databases(0, examGrade)
+        Calc3.overallDatabasesGrade()
+
+    
 
 
 
