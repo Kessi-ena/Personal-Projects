@@ -1,7 +1,4 @@
 #Welcome message
-from calendar import c
-
-
 print(" ")
 print("Welcome to Modulator")
 
@@ -23,6 +20,12 @@ class webDev:
         webGrade = ((((self.test/30)*100) + ((self.project/40)*100) + ((self.exercises/30)*100)) / 3) 
         print("Your overall grade is ",webGrade,"%")
 
+        if webGrade < 40:
+            needed = 40 - webGrade
+            print("You need", needed, "% more to reach the pass mark of 40%.")
+        else:
+            print("Congrats! You have already passed.")
+
 #If user selected WebDev
 if moduleName == 1:
     print("Enter 'y' for grades you have\nEnter 'n' for grades you don't have.")
@@ -42,7 +45,6 @@ if moduleName == 1:
         #To cap project grade at 40
         while ((projectGrade < 0) or (projectGrade > 40)):
             projectGrade = float(input("Project grade is only marked over 40\nPlease type in a valid grade:\n"))
-
 
         exercisesGrade = float(input("Enter the grade for your exercises(%): "))
         #To cap exercises grade at 30
@@ -153,8 +155,20 @@ class networking:
         self.caWork = caWork
 
     def overallNetworkingGrade(self):
-        networkingGrade = ((((self.exam/50) * 100) + ((self.quiz1/5) * 100) + ((self.quiz2/5) * 100) + ((self.practicalTest/10) * 100) + ((self.caWork/30) * 100)) / 5)
-        print("Your overall grade is ",networkingGrade,"%")
+        networkingGrade = (
+            (((self.exam / 50) * 100) +
+             ((self.quiz1 / 5) * 100) +
+             ((self.quiz2 / 5) * 100) +
+             ((self.practicalTest / 10) * 100) +
+             ((self.caWork / 30) * 100)) / 5
+        )
+        print("Your overall grade is", networkingGrade, "%")
+
+        if networkingGrade < 40:
+            needed = 40 - networkingGrade
+            print("You need", needed, "% more to reach the pass mark of 40%.")
+        else:
+            print("Congrats! You have already passed.")
 
 #If user selected networking
 if moduleName == 2:
@@ -560,6 +574,14 @@ class databases:
         databasesGrade = ((((self.ca/50)*100) + ((self.exam/50)*100)) / 2) 
         print("Your overall grade is ",databasesGrade,"%")
 
+
+        # Calculate how much is needed to pass
+        needed = 40 - databasesGrade
+        if needed > 0:
+            print("You need", needed, "% to pass Databases")
+        else:
+            print("You have enough to pass already.")
+
 #If user selected databases 
 if moduleName == 3:
     print("Enter 'y' for grades you have\nEnter 'n' for grades you don't have.")
@@ -616,14 +638,18 @@ class OOP:
         self.exam = exam
 
     def overallOOPGrade(self):
-        #labs + assignment (together worth 50%)
-        continuous_assessment = ((self.labs / 40) * 20) + ((self.assignment / 60) * 30)
-        
-        #exam (worth 50%)
-        exam_part = (self.exam / 50) * 50
-        
-        oopGrade = continuous_assessment + exam_part
-        print("Your overall grade is", oopGrade, "%")
+        # labs (out of 40) + assignment (out of 60) = 50%
+        coursework = ((self.labs + self.assignment) / 100) * 50
+        examPart = (self.exam / 50) * 50
+        oopGrade = coursework + examPart
+        print("Your overall grade is ", oopGrade, "%")
+
+        # Calculate how much is needed to pass
+        needed = 40 - oopGrade
+        if needed > 0:
+            print("You need", needed, "% more to reach pass OOP\nYou still need at least 40 in the exam though!")
+        else:
+            print("You have enough to pass already.")
 
 #If user selected OOP
 if moduleName == 4:
@@ -671,7 +697,7 @@ if moduleName == 4:
         
         labGrade = float(input("Enter your lab grade(%): "))
         #To cap lab grade at 40
-        while ((labGrade < 0) or (caGrade > 40)):
+        while ((labGrade < 0) or (labGrade > 40)):
             labGrade = float(input("Lab grade is only marked over 40\nPlease type in a valid grade:\n"))
 
         assignmentGrade = float(input("Enter your assignment grade(%): "))
